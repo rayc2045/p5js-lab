@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://p5js.org/favicon.ico" />
+    <title>p5.js Lab</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 100dvh;
+        color: gainsboro;
+        background-color: black;
+      }
+      main {
+        height: 100%;
+        display: grid;
+        place-items: center;
+        & canvas {
+          border-radius: 5px;
+        }
+      }
+    </style>
+    <script defer src="/node_modules/p5/lib/p5.min.js"></script>
+    <script defer>
+      const urlParams = new URLSearchParams(window.location.search),
+        sketchNumber = urlParams.get("sketch");
+
+      const script = document.createElement("script");
+      script.src =
+        sketchNumber && !isNaN(sketchNumber)
+          ? `sketches/${sketchNumber}.js`
+          : `example.js`;
+      document.head.appendChild(script);
+    </script>
+  </head>
+  <body></body>
+</html>

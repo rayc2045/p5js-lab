@@ -1,0 +1,17 @@
+{
+  "name": "p5js-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.22.0",
+  "dependencies": {
+    "p5": "^2.1.2"
+  }
+}
