@@ -29,13 +29,11 @@
     <script defer src="/node_modules/p5/lib/p5.min.js"></script>
     <script defer>
       const urlParams = new URLSearchParams(window.location.search),
-        sketchNumber = urlParams.get("sketch");
+        sketchName = urlParams.get("sketch");
+      document.title += ` - ${sketchName || "example"}`;
 
       const script = document.createElement("script");
-      script.src =
-        sketchNumber && !isNaN(sketchNumber)
-          ? `sketches/${sketchNumber}.js`
-          : `example.js`;
+      script.src = sketchName ? `sketches/${sketchName}.js` : `example.js`;
       document.head.appendChild(script);
     </script>
   </head>
