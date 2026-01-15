@@ -11,14 +11,13 @@ let gap = 8,
   y = height - h / 4;
 
 function draw() {
-  let w = random(h * 1.5, h * 4);
-
-  if (frameCount % 9 === 0) fill("silver");
-  else if (w > h * 3) fill("darkred");
-  else if (w > h * 2) fill("firebrick");
-  else fill("crimson");
-
   if (x < width && y >= -gap - h) {
+    let w = random(h * 1.5, h * 4),
+      brickColor = "crimson";
+    if (frameCount % 9 === 0) brickColor = "silver";
+    else if (w > h * 3) brickColor = "darkred";
+    else if (w > h * 2) brickColor = "firebrick";
+    fill(brickColor);
     rect(x, y, w, h);
     x += w + gap;
   } else {
