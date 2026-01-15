@@ -8,13 +8,15 @@ function setup() {
 let gap = 8,
   h = 20,
   x = -10,
-  y = height - h / 4;
+  y = height - h / 5;
 
 function draw() {
-  if (x < width && y >= -gap - h) {
-    let w = random(h * 1.5, h * 4),
-      brickColor = "crimson";
-    if (frameCount % 9 === 0) brickColor = "silver";
+  if (x < width && y > -h) {
+    const arr = [0, 0, 0, 1],
+      i = Math.floor(random(0, arr.length)),
+      w = random(h * 1.5, h * 4);
+    let brickColor = "crimson";
+    if (frameCount % 9 <= arr[i]) brickColor = "silver";
     else if (w > h * 3) brickColor = "darkred";
     else if (w > h * 2) brickColor = "firebrick";
     fill(brickColor);
