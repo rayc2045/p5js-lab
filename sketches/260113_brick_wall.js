@@ -12,11 +12,10 @@ let gap = 8,
 
 function draw() {
   if (x < width && y > -h) {
-    const arr = [0, 0, 0, 1],
-      i = Math.floor(random(0, arr.length)),
+    const n = Number(random() <= 0.25),
       w = random(h * 1.5, h * 4);
     let brickColor = "crimson";
-    if (frameCount % 9 <= arr[i]) brickColor = "silver";
+    if (frameCount % 9 <= n) brickColor = "silver";
     else if (w > h * 3) brickColor = "darkred";
     else if (w > h * 2) brickColor = "firebrick";
     fill(brickColor);
