@@ -31,10 +31,7 @@
     <script>
       const sketchName = new URLSearchParams(location.search).get("sketch");
       document.title += ` - ${sketchName || "example"}`;
-
-      const script = document.createElement("script");
-      script.src = sketchName ? `sketches/${sketchName}.js` : `example.js`;
-      document.head.appendChild(script);
+      appendScript(sketchName ? `sketches/${sketchName}.js` : `example.js`);
     </script>
   </head>
   <body></body>
