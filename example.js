@@ -1,8 +1,12 @@
+const s = Math.min(innerWidth, innerHeight) * 0.9,
+  width = s,
+  height = s;
+
 function setup() {
-  createCanvas(800, 800);
-  background(100);
+  createCanvas(width, height);
+  background("gainsboro");
 }
 
 function draw() {
-  circle(mouseX, mouseY, 20);
+  circle(mouseX, mouseY, 30);
 }

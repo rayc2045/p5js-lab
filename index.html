@@ -20,9 +20,17 @@
       main {
         height: 100%;
         display: grid;
-        place-items: center;
+        align-content: center;
+        justify-items: center;
+        gap: 1.5rem;
         & canvas {
           border-radius: 5px;
+        }
+        & p {
+          margin: 0;
+          font-family: monospace;
+          font-size: 1.25rem;
+          letter-spacing: 0.05rem;
         }
       }
     </style>
@@ -32,6 +40,12 @@
       const sketchName = new URLSearchParams(location.search).get("sketch");
       document.title += ` - ${sketchName || "example"}`;
       appendScript(sketchName ? `sketches/${sketchName}.js` : `example.js`);
+
+      window.addEventListener("load", () => {
+        const title = document.createElement("p");
+        title.textContent = sketchName || "example";
+        document.querySelector("main").append(title);
+      });
     </script>
   </head>
   <body></body>
