@@ -1,5 +1,6 @@
-const width = 800,
-  height = 800;
+const s = Math.min(innerWidth, innerHeight) * 0.9,
+  width = s,
+  height = s;
 
 function setup() {
   createCanvas(width, height);
