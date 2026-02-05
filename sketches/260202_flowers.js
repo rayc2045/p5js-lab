@@ -69,9 +69,9 @@ const sizes = ["XS", "S", "M", "L"],
   ],
   createRandomFlower = (x, y) => {
     createFlower(x, y, {
-      size: getRandomItem(sizes),
-      stamenColor: getRandomItem(stamenColors),
-      petalColor: getRandomItem(petalColors),
+      size: random(sizes),
+      stamenColor: random(stamenColors),
+      petalColor: random(petalColors),
     });
   };
 
