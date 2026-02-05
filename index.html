@@ -7,6 +7,9 @@
     <link rel="icon" href="https://p5js.org/favicon.ico" />
     <title>p5.js Lab</title>
     <style>
+      :root {
+        --gap: 1.5rem;
+      }
       html,
       body {
         margin: 0;
@@ -14,16 +17,16 @@
       }
       body {
         height: 100dvh;
+        display: grid;
+        place-content: center;
         color: gainsboro;
         background-color: black;
       }
       main {
-        height: 100%;
         display: grid;
-        align-content: center;
         justify-items: center;
-        gap: 1.5rem;
-        & canvas {
+        gap: var(--gap);
+        > canvas {
           border-radius: 5px;
         }
         & p {
@@ -38,13 +41,14 @@
     <script src="./utils.js"></script>
     <script>
       const sketchName = new URLSearchParams(location.search).get("sketch");
-      document.title += ` - ${sketchName || "example"}`;
       appendScript(sketchName ? `sketches/${sketchName}.js` : `example.js`);
 
       window.addEventListener("load", () => {
-        const title = document.createElement("p");
-        title.textContent = sketchName || "example";
-        document.querySelector("main").append(title);
+        const text = sketchName || "example";
+        document.title += ` - ${text}`;
+        const p = document.createElement("p");
+        p.textContent = text;
+        document.querySelector("main").append(p);
       });
     </script>
   </head>
