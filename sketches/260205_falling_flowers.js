@@ -87,8 +87,8 @@ function setup() {
 }
 
 function draw() {
-  background("gainsboro");
   if (frameCount % 80 === 0) appendFlower();
+  background("gainsboro");
 
   for (let i = 0; i < flowers.length; i++) {
     push();
@@ -105,6 +105,8 @@ function draw() {
     } = flowers[i];
 
     translate(x, y);
+    rotate(angle);
+    flowers[i].angle += angularVelocity;
 
     let w, h;
     if (size === "XS") {
@@ -120,13 +122,9 @@ function draw() {
       w = 120;
       h = 40;
     }
-
-    rotate(angle);
-    flowers[i].angle += angularVelocity;
     fill(stamenColor);
     // ellipseMode(CENTER);
     ellipse(0, 0, w / 2.5);
-
     ellipseMode(CORNER);
     const numOfPetals = 16,
       gap = w / 4;
@@ -142,20 +140,18 @@ function draw() {
 
     pop();
   }
-
-  // log(flowers.length);
 }
 
 const position = [0, 0];
 
 function mouseMoved() {
+  const [posX, posY] = position;
   if (
     mouseX >= 0 &&
     mouseX <= width &&
     mouseY >= 0 &&
     mouseY <= height &&
-    (Math.abs(mouseX - position[0]) >= 150 ||
-      Math.abs(mouseY - position[1]) >= 150)
+    dist(mouseX, mouseY, posX, posY) >= 160
   ) {
     appendFlower(mouseX, mouseY);
     position.length = 0;
