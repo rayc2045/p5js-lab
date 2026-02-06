@@ -83,6 +83,7 @@ const sizes = ["XS", "S", "M", "L"],
 
 function setup() {
   createCanvas(width, height);
+  appendFlower();
 }
 
 function draw() {
