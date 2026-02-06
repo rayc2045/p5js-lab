@@ -73,29 +73,36 @@ const sizes = ["XS", "S", "M", "L"],
       x: x || random(width),
       y: y || -120,
       size: random(sizes),
-      angle: random(15),
-      a: random(0.002, 0.006) * random([1, -1]),
       stamenColor: random(stamenColors),
       petalColor: random(petalColors),
+      angle: random(15),
+      angularVelocity: random(0.002, 0.006) * random([1, -1]),
       velocity: random(1, 3),
     });
   };
 
 function setup() {
   createCanvas(width, height);
-  background("gainsboro");
-  appendFlower();
 }
 
 function draw() {
-  if (frameCount % 90 === 0) appendFlower();
   background("gainsboro");
+  if (frameCount % 80 === 0) appendFlower();
 
   for (let i = 0; i < flowers.length; i++) {
     push();
 
-    const { x, y, size, angle, a, stamenColor, petalColor, velocity } =
-      flowers[i];
+    const {
+      x,
+      y,
+      size,
+      stamenColor,
+      petalColor,
+      angle,
+      angularVelocity,
+      velocity,
+    } = flowers[i];
+
     translate(x, y);
 
     let w, h;
@@ -114,7 +121,7 @@ function draw() {
     }
 
     rotate(angle);
-    flowers[i].angle += a;
+    flowers[i].angle += angularVelocity;
     fill(stamenColor);
     // ellipseMode(CENTER);
     ellipse(0, 0, w / 2.5);
@@ -135,9 +142,22 @@ function draw() {
     pop();
   }
 
-  log(flowers.length);
+  // log(flowers.length);
 }
 
-function mouseClicked() {
-  appendFlower(mouseX, mouseY);
+const position = [0, 0];
+
+function mouseMoved() {
+  if (
+    mouseX >= 0 &&
+    mouseX <= width &&
+    mouseY >= 0 &&
+    mouseY <= height &&
+    (Math.abs(mouseX - position[0]) >= 150 ||
+      Math.abs(mouseY - position[1]) >= 150)
+  ) {
+    appendFlower(mouseX, mouseY);
+    position.length = 0;
+    position.push(mouseX, mouseY);
+  }
 }
