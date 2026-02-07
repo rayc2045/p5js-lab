@@ -77,7 +77,8 @@ const sizes = ["XS", "S", "M", "L"],
       petalColor: random(petalColors),
       angle: random(15),
       angularVelocity: random(0.002, 0.006) * random([1, -1]),
-      velocity: random(1, 3),
+      velocity: random(1, 2),
+      drawCount: 0,
     });
   };
 
@@ -87,7 +88,7 @@ function setup() {
 }
 
 function draw() {
-  if (frameCount % 80 === 0) appendFlower();
+  if (frameCount % 60 === 0) appendFlower();
   background("gainsboro");
 
   for (let i = 0; i < flowers.length; i++) {
@@ -102,6 +103,7 @@ function draw() {
       angle,
       angularVelocity,
       velocity,
+      drawCount,
     } = flowers[i];
 
     translate(x, y);
@@ -135,7 +137,8 @@ function draw() {
       rotate(PI / (numOfPetals / 2));
     }
 
-    flowers[i].y += velocity;
+    flowers[i].y += velocity + drawCount * 0.025;
+    flowers[i].drawCount++;
     if (flowers[i].y > height + w + gap) flowers.splice(i, 1);
 
     pop();
