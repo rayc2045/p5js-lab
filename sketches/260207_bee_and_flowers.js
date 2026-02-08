@@ -87,7 +87,7 @@ const stamenColors = [
 function setup() {
   createCanvas(width, height);
   background("gainsboro");
-  const num = parseInt(width / 100);
+  const num = parseInt(width / 90);
   for (let i = 0; i < num; i++) createRandomFlower();
   position.mouse.x = position.bee.x = -width / 10;
   position.mouse.y = position.bee.y = height / 2;
