@@ -156,15 +156,15 @@ function drawBee({ x, y }) {
   translate(x, y);
 
   strokeWeight(3);
-  stroke("dimgray");
+  stroke("saddlebrown");
   fill("gold");
   ellipse(0, 0, 50, 30);
 
   strokeWeight(5);
   stroke("sienna");
-  line(-10, -10, -10, 10);
-  line(0, -10, 0, 10);
-  line(10, -10, 10, 10);
+  line(-12, -10, -12, 10);
+  line(0, -12, 0, 12);
+  line(12, -10, 12, 10);
 
   pop();
 }
