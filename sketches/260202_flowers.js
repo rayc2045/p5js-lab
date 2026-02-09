@@ -2,8 +2,7 @@ const s = Math.min(innerWidth, innerHeight) * 0.9,
   width = s,
   height = s;
 
-const sizes = ["XS", "S", "M", "L"],
-  stamenColors = [
+const stamenColors = [
     "pink",
     "lightyellow",
     "lemonchiffon",
@@ -67,68 +66,80 @@ const sizes = ["XS", "S", "M", "L"],
     "antiquewhite",
     "mistyrose",
   ],
+  petalSize = { min: 5, max: 120 },
+  flowers = [],
   createRandomFlower = (x, y) => {
-    createFlower(x, y, {
-      size: random(sizes),
+    flowers.push({
+      x: x || random(width),
+      y: y || random(height),
+      size: petalSize.min,
+      maxSize: random(60, petalSize.max),
+      rotateDirection: random([1, -1]),
       stamenColor: random(stamenColors),
       petalColor: random(petalColors),
     });
   };
 
-let rate = 3;
-
 function setup() {
   createCanvas(width, height);
   background("gainsboro");
-  frameRate(rate);
   createRandomFlower();
 }
 
 function draw() {
-  createRandomFlower();
-  rate = random(1, 6);
-  frameRate(rate);
+  background("gainsboro");
+
+  if (frameCount % parseInt(random(20, 50)) === 0) createRandomFlower();
+
+  const n = Math.floor(width / 50);
+
+  for (let i = 0; i < flowers.length; i++) {
+    drawFlower(flowers[i]);
+    const { x, y, size, maxSize } = flowers[i];
+    if (i >= Math.floor(flowers.length / n))
+      flowers[i].size = lerp(size, maxSize, 0.1);
+    else flowers[i].size = lerp(size, petalSize.min, 0.05);
+  }
+
+  if (flowers.length > n) {
+    for (let i = 0; i < flowers.length - n; i++) {
+      flowers.splice(0, 1);
+    }
+  }
 }
 
 function mouseClicked() {
   createRandomFlower(mouseX, mouseY);
 }
 
-function createFlower(x, y, config = {}) {
+function drawFlower({
+  x,
+  y,
+  size,
+  maxSize,
+  rotateDirection,
+  stamenColor,
+  petalColor,
+}) {
   push();
 
-  x ||= random(width);
-  y ||= random(height);
   translate(x, y);
-
-  const { size = "M", stamenColor = "gold", petalColor = "pink" } = config;
-  let w, h;
-  if (size === "XS") {
-    w = 30;
-    h = 12;
-  } else if (size === "S") {
-    w = 50;
-    h = 20;
-  } else if (size === "M") {
-    w = 80;
-    h = 30;
-  } else {
-    w = 120;
-    h = 40;
-  }
-
-  rotate(random(15));
+  rotate(
+    lerp(petalSize.min / maxSize, size / maxSize, maxSize / petalSize.max) *
+      rotateDirection,
+  );
   fill(stamenColor);
   // ellipseMode(CENTER);
-  ellipse(0, 0, w / 2.5);
+  ellipse(0, 0, size / 2.5);
 
   ellipseMode(CORNER);
-  const numOfPetals = 16;
+  const numOfPetals = 16,
+    h = 35;
   for (let i = 0; i < numOfPetals; i++) {
     fill(petalColor);
-    const gap = w / 4;
-    ellipse(gap, -h / 2, w, h);
-    line(gap, 0, w + gap, 0);
+    const gap = size / 5;
+    ellipse(gap, -h / 2, size, h);
+    line(gap, 0, size + gap, 0);
     rotate(PI / (numOfPetals / 2));
   }
 
