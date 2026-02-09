@@ -96,14 +96,11 @@ function draw() {
   for (let i = 0; i < flowers.length; i++) {
     drawFlower(flowers[i]);
     const { x, y, size, maxSize } = flowers[i];
-    if (i >= Math.floor(flowers.length / n))
+    if (i >= flowers.length - n) {
       flowers[i].size = lerp(size, maxSize, 0.1);
-    else flowers[i].size = lerp(size, petalSize.min, 0.05);
-  }
-
-  if (flowers.length > n) {
-    for (let i = 0; i < flowers.length - n; i++) {
-      flowers.splice(0, 1);
+    } else {
+      flowers[i].size = lerp(size, petalSize.min, 0.03);
+      if (Math.floor(flowers[i].size) === petalSize.min) flowers.splice(i, 1);
     }
   }
 }

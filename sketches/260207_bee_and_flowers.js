@@ -113,7 +113,10 @@ function draw() {
 
   position.bee.x = lerp(position.bee.x, position.mouse.x, 0.07);
   position.bee.y = lerp(position.bee.y, position.mouse.y, 0.07);
-  drawBee(position.bee);
+  drawBee({ x: width / 2, y: height / 2 });
+  // position.bee.x = lerp(position.bee.x, position.mouse.x, 0.07) + random(-3, 3);
+  // position.bee.y = lerp(position.bee.y, position.mouse.y, 0.07) + random(-3, 3);
+  // drawBee(position.bee);
 }
 
 function drawFlower({
@@ -141,7 +144,7 @@ function drawFlower({
     h = 35;
   for (let i = 0; i < numOfPetals; i++) {
     fill(petalColor);
-    const gap = size / 4;
+    const gap = size / 5;
     ellipse(gap, -h / 2, size, h);
     line(gap, 0, size + gap, 0);
     rotate(PI / (numOfPetals / 2));
@@ -154,6 +157,10 @@ function drawBee({ x, y }) {
   push();
 
   translate(x, y);
+
+  brginShape();
+  vertax(x - 5, y - 5);
+  endShape(CLOSE);
 
   strokeWeight(3);
   stroke("saddlebrown");
