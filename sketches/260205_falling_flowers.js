@@ -129,7 +129,7 @@ function draw() {
     ellipse(0, 0, w / 2.5);
     ellipseMode(CORNER);
     const numOfPetals = 16,
-      gap = w / 4;
+      gap = w / 5;
     for (let i = 0; i < numOfPetals; i++) {
       fill(petalColor);
       ellipse(gap, -h / 2, w, h);
