@@ -1,10 +1,7 @@
-const s = Math.min(innerWidth, innerHeight) * 0.9,
-  width = s,
-  height = s;
-
 function setup() {
-  createCanvas(width, height);
-  background(220);
+  const s = min(innerWidth, innerHeight) * 0.9;
+  createCanvas(s, s);
+  background("gainsboro");
 }
 
 let r = 100,

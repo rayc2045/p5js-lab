@@ -6,6 +6,10 @@ function appendScript(src) {
   document.head.append(script);
 }
 
+function getColorNames(url) {
+  return url.split("?colors=")[1]?.split("+").filter(Boolean) || [];
+}
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);

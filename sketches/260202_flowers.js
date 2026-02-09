@@ -1,71 +1,9 @@
-const s = Math.min(innerWidth, innerHeight) * 0.9,
-  width = s,
-  height = s;
-
-const stamenColors = [
-    "pink",
-    "lightyellow",
-    "lemonchiffon",
-    "papayawhip",
-    "moccasin",
-    "peachpuff",
-    "gold",
-    "palegoldenrod",
-    "khaki",
-    "cornsilk",
-    "blanchedalmond",
-    "beige",
-    "seashell",
-    "oldlace",
-    "floralwhite",
-    "ivory",
-    "antiquewhite",
-    "linen",
-    "lavenderblush",
-    "mistyrose",
-  ],
-  petalColors = [
-    "indianred",
-    "lightcoral",
-    "salmon",
-    "darksalmon",
-    "lightsalmon",
-    "lightpink",
-    "lightpink",
-    "hotpink",
-    "palevioletred",
-    "coral",
-    "tomato",
-    "orangered",
-    "darkorange",
-    "orange",
-    "gold",
-    "darkseagreen",
-    "mediumaquamarine",
-    "lightseagreen",
-    "paleturquoise",
-    "aquamarine",
-    "turquoise",
-    "mediumturquoise",
-    "darkturquoise",
-    "cadetblue",
-    "lightsteelblue",
-    "powderblue",
-    "lightblue",
-    "skyblue",
-    "lightskyblue",
-    "cornflowerblue",
-    "lavender",
-    "thistle",
-    "plum",
-    "violet",
-    "orchid",
-    "mediumorchid",
-    "mediumpurple",
-    "sandybrown",
-    "antiquewhite",
-    "mistyrose",
-  ],
+const stamenColors = getColorNames(
+    "https://color-names.netlify.app/?colors=pink+lightyellow+lemonchiffon+papayawhip+moccasin+peachpuff+gold+palegoldenrod+khaki+cornsilk+blanchedalmond+beige+seashell+oldlace+floralwhite+ivory+antiquewhite+linen+lavenderblush+mistyrose",
+  ),
+  petalColors = getColorNames(
+    "https://color-names.netlify.app/?colors=indianred+lightcoral+salmon+darksalmon+lightsalmon+lightpink+lightpink+hotpink+palevioletred+coral+tomato+orangered+darkorange+orange+gold+darkseagreen+mediumaquamarine+lightseagreen+paleturquoise+aquamarine+turquoise+mediumturquoise+darkturquoise+cadetblue+lightsteelblue+powderblue+lightblue+skyblue+lightskyblue+cornflowerblue+lavender+thistle+plum+violet+orchid+mediumorchid+mediumpurple+sandybrown+antiquewhite+mistyrose",
+  ),
   petalSize = { min: 5, max: 120 },
   flowers = [],
   createRandomFlower = (x, y) => {
@@ -81,7 +19,8 @@ const stamenColors = [
   };
 
 function setup() {
-  createCanvas(width, height);
+  const s = min(innerWidth, innerHeight) * 0.9;
+  createCanvas(s, s);
   background("gainsboro");
   createRandomFlower();
 }
@@ -91,16 +30,16 @@ function draw() {
 
   if (frameCount % parseInt(random(20, 50)) === 0) createRandomFlower();
 
-  const n = Math.floor(width / 50);
+  const maxNumberOfFlowers = parseInt(width / 50);
 
   for (let i = 0; i < flowers.length; i++) {
     drawFlower(flowers[i]);
     const { x, y, size, maxSize } = flowers[i];
-    if (i >= flowers.length - n) {
+    if (i >= flowers.length - maxNumberOfFlowers) {
       flowers[i].size = lerp(size, maxSize, 0.1);
     } else {
       flowers[i].size = lerp(size, petalSize.min, 0.03);
-      if (Math.floor(flowers[i].size) === petalSize.min) flowers.splice(i, 1);
+      if (parseInt(flowers[i].size) === petalSize.min) flowers.splice(i, 1);
     }
   }
 }

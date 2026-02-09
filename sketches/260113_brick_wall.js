@@ -1,16 +1,13 @@
-const s = Math.min(innerWidth, innerHeight) * 0.9,
-  width = s,
-  height = s;
-
 function setup() {
-  createCanvas(width, height);
+  const s = min(innerWidth, innerHeight) * 0.9;
+  createCanvas(s, s);
   background("rosybrown");
 }
 
 let gap = 8,
   h = 20,
   x = -10,
-  y = height - h / 5;
+  y = innerHeight - h / 5;
 
 function draw() {
   if (x < width && y > -h) {
