@@ -89,7 +89,8 @@ function setup() {
   background("gainsboro");
   const num = parseInt(width / 50);
   for (let i = 0; i < num; i++) createRandomFlower();
-  position.mouse.x = position.bee.x = -width / 10;
+  position.bee.x = -width;
+  position.mouse.x = width / 5;
   position.mouse.y = position.bee.y = height / 2;
 }
 
