@@ -1,9 +1,9 @@
 const sizes = ["XS", "S", "M", "L"],
   stamenColors = getColorNames(
-    "https://color-names.netlify.app/?colors=pink+lightyellow+lemonchiffon+papayawhip+moccasin+peachpuff+gold+palegoldenrod+khaki+cornsilk+blanchedalmond+beige+seashell+oldlace+floralwhite+ivory+antiquewhite+linen+lavenderblush+mistyrose",
+    "pink+lightyellow+lemonchiffon+papayawhip+moccasin+peachpuff+gold+palegoldenrod+khaki+cornsilk+blanchedalmond+beige+seashell+oldlace+floralwhite+ivory+antiquewhite+linen+lavenderblush+mistyrose",
   ),
   petalColors = getColorNames(
-    "https://color-names.netlify.app/?colors=indianred+lightcoral+salmon+darksalmon+lightsalmon+lightpink+lightpink+hotpink+palevioletred+coral+tomato+orangered+darkorange+orange+gold+darkseagreen+mediumaquamarine+lightseagreen+paleturquoise+aquamarine+turquoise+mediumturquoise+darkturquoise+cadetblue+lightsteelblue+powderblue+lightblue+skyblue+lightskyblue+cornflowerblue+lavender+thistle+plum+violet+orchid+mediumorchid+mediumpurple+sandybrown+antiquewhite+mistyrose",
+    "indianred+lightcoral+salmon+darksalmon+lightsalmon+lightpink+lightpink+hotpink+palevioletred+coral+tomato+orangered+darkorange+orange+gold+darkseagreen+mediumaquamarine+lightseagreen+paleturquoise+aquamarine+turquoise+mediumturquoise+darkturquoise+cadetblue+lightsteelblue+powderblue+lightblue+skyblue+lightskyblue+cornflowerblue+lavender+thistle+plum+violet+orchid+mediumorchid+mediumpurple+sandybrown+antiquewhite+mistyrose",
   ),
   flowers = [],
   appendFlower = (x, y) => {

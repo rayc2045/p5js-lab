@@ -6,8 +6,8 @@ function appendScript(src) {
   document.head.append(script);
 }
 
-function getColorNames(url) {
-  return url.split("?colors=")[1]?.split("+").filter(Boolean) || [];
+function getColorNames(str) {
+  return (str.split("?colors=")[1] || str).split("+").filter(Boolean);
 }
 
 function getRandomInt(min, max) {
