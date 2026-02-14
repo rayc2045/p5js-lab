@@ -28,9 +28,9 @@ function setup() {
 function draw() {
   background("gainsboro");
 
-  if (frameCount % parseInt(random(20, 50)) === 0) createRandomFlower();
+  if (frameCount % int(random(20, 50)) === 0) createRandomFlower();
 
-  const maxNumberOfFlowers = parseInt(width / 50);
+  const maxNumberOfFlowers = int(width / 50);
 
   for (let i = 0; i < flowers.length; i++) {
     drawFlower(flowers[i]);
@@ -39,7 +39,7 @@ function draw() {
       flowers[i].size = lerp(size, maxSize, 0.1);
     } else {
       flowers[i].size = lerp(size, petalSize.min, 0.03);
-      if (parseInt(flowers[i].size) === petalSize.min) flowers.splice(i, 1);
+      if (int(flowers[i].size) === petalSize.min) flowers.splice(i, 1);
     }
   }
 }

@@ -26,7 +26,7 @@ function setup() {
   const s = min(innerWidth, innerHeight) * 0.9;
   createCanvas(s, s);
   background("gainsboro");
-  const num = parseInt(width / 50);
+  const num = int(width / 50);
   for (let i = 0; i < num; i++) createRandomFlower();
   position.bee.x = -width;
   position.mouse.x = width / 5;
