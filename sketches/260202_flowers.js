@@ -60,6 +60,8 @@ function drawFlower({
   push();
 
   translate(x, y);
+  const s = width / (640 * 0.9);
+  if (s < 1) scale(s);
   rotate(
     lerp(petalSize.min / maxSize, size / maxSize, maxSize / petalSize.max) *
       rotateDirection,

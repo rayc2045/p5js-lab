@@ -47,6 +47,8 @@ function draw() {
     } = flowers[i];
 
     translate(x, y);
+    const s = width / (640 * 0.9);
+    if (s < 1) scale(s);
     rotate(angle);
     flowers[i].angle += angularVelocity;
 
