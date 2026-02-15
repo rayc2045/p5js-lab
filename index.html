@@ -41,7 +41,7 @@
     <script src="./utils.js"></script>
     <script>
       const sketchName = new URLSearchParams(location.search).get("sketch");
-      appendScript(sketchName ? `sketches/${sketchName}.js` : `example.js`);
+      appendScript(sketchName ? `./sketches/${sketchName}.js` : `./example.js`);
 
       window.addEventListener("load", () => {
         const text = sketchName || "example";
