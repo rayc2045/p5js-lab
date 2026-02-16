@@ -8,7 +8,7 @@
     <title>p5.js Lab</title>
     <style>
       :root {
-        --gap: 1.5rem;
+        --gap: 1.25rem;
       }
       html,
       body {
@@ -19,11 +19,14 @@
         font-size: max(16px, 0.85vmin + 12px);
       }
       body {
-        height: 100dvh;
+        min-height: 100dvh;
         display: grid;
         place-content: center;
         color: gainsboro;
         background-color: black;
+        & ::selection {
+          background-color: firebrick;
+        }
       }
       main {
         display: grid;
@@ -39,21 +42,53 @@
         }
       }
     </style>
+  </head>
+  <body>
+    <main></main>
     <!--<script src="/node_modules/p5/lib/p5.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
     <script src="./utils.js"></script>
     <script>
-      const sketchName = new URLSearchParams(location.search).get("sketch");
-      appendScript(sketchName ? `./sketches/${sketchName}.js` : `./example.js`);
+      (async () => {
+        const params = new URLSearchParams(location.search);
+        if (!params.has("sketch")) location.search = "?sketch=";
 
-      window.addEventListener("load", () => {
-        const text = sketchName || "example";
-        document.title += ` - ${text}`;
-        const p = document.createElement("p");
-        p.textContent = text;
-        document.querySelector("main").append(p);
-      });
+        const sketchName = params.get("sketch"),
+          appendScript = (src) => {
+            appendElement(document.body, "script", { src });
+          };
+
+        let title = "";
+        const appendTitle = () => {
+          document.title += ` - ${title}`;
+          appendElement("main", "p", { textContent: title });
+        };
+
+        try {
+          if (!sketchName) {
+            appendScript("./example.js");
+            title = "example";
+          } else {
+            const src = `./sketches/${sketchName}.js`;
+            appendScript(src);
+
+            const res = await fetch(src, { method: "HEAD" });
+            if (res.ok) {
+              title = sketchName;
+            } else {
+              title = "404 NOT FOUND";
+              appendTitle();
+              return;
+            }
+          }
+        } catch (error) {
+          console.error("script load error:", error);
+          title = error;
+        }
+
+        await waitForElement("main > canvas");
+        appendTitle();
+      })();
     </script>
-  </head>
-  <body></body>
+  </body>
 </html>

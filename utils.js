@@ -1,9 +1,29 @@
-const { log } = console;
+const { log: p } = console;
 
-function appendScript(src) {
-  const script = document.createElement("script");
-  script.src = src;
-  document.head.append(script);
+function appendElement(parent, tag, attr = {}) {
+  const element = document.createElement(tag);
+  for (const key in attr) element[key] = attr[key];
+  if (typeof parent === "string") parent = document.querySelector(parent);
+  parent.append(element);
+}
+
+function waitForElement(selector) {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector))
+      return resolve(document.querySelector(selector));
+
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        observer.disconnect();
+        resolve(document.querySelector(selector));
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
 }
 
 function getColorNames(str) {
