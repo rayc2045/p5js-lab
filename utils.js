@@ -24,18 +24,11 @@ function waitForElement(selector) {
   });
 }
 
-function p(args) {
-  console.log(args);
+function p(...args) {
+  console.log(...args);
 
   const consoleEl = document.querySelector(".console"),
-    textContent = JSON.stringify(args)
-      .replaceAll("[", "[ ")
-      .replaceAll("]", " ]")
-      .replaceAll("{", "{ ")
-      .replaceAll("}", " }")
-      .replaceAll(",", ", ")
-      .replaceAll(":", ": ")
-      .replaceAll("  ", " ");
+    textContent = args.join(" ");
 
   if (consoleEl) {
     consoleEl.textContent = textContent;
