@@ -48,7 +48,7 @@ function p(args) {
         padding: .75em;
         padding-left: 1em;
         font-family: monospace;
-        font-size: 1.2em;
+        font-size: 1.1em;
         color: darkgray;`,
       textContent,
     });
