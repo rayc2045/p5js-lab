@@ -2,13 +2,14 @@ let inputEl,
   sliderEl,
   buttonEl,
   randomValue = 0,
-  colorPickerEl;
+  colorPickerEl,
+  radioElement;
 
 function setup() {
   const s = min(innerWidth, innerHeight) * 0.9;
   createCanvas(s, s);
 
-  inputEl = createInput("Hello");
+  inputEl = createInput(random(["Hello", "🐝 嗡嗡"]));
   inputEl.position(width / 20, height / 20);
 
   sliderEl = createSlider(36, 114, 48, 0.1); // min, max, default, step
@@ -20,18 +21,29 @@ function setup() {
     randomValue = randomValue === 0 ? random(5, 15) : 0;
   });
 
-  colorPickerEl = createColorPicker("crimson");
+  colorPickerEl = createColorPicker("deepskyblue");
   colorPickerEl.position(width / 20, height / 20 + 150);
+
+  radioElement = createRadio();
+  radioElement.option("normal");
+  radioElement.option("rotate");
+  radioElement.option("scale");
+  radioElement.style("padding", ".1em .25em");
+  radioElement.style("color", "black");
+  radioElement.style("background-color", "gainsboro");
+  radioElement.position(width / 20, height / 20 + 200);
 }
 
 function draw() {
   background("black");
 
-  const txt = inputEl.value(),
-    sliderValue = sliderEl.value(),
+  let txt = inputEl.value();
+  const sliderValue = sliderEl.value(),
     selectedColor = colorPickerEl.value(),
-    textLength = textWidth(txt) + 10;
+    textLength = textWidth(txt) + 10,
+    mode = radioElement.value();
 
+  if (txt === "hello") txt = "✋";
   textSize(sliderValue);
   textStyle(BOLD);
 
@@ -48,8 +60,13 @@ function draw() {
     }
 
     for (let x = 0 - textLength; x < width; x += textLength) {
+      push();
       const value = random(-randomValue, randomValue);
-      text(txt, x + value, y + value);
+      translate(x + value, y + value);
+      if (mode === "rotate") rotate(sin(frameCount / 20 + y / 10));
+      else if (mode === "scale") scale(sin(frameCount / 20 + y / 10) + 1);
+      text(txt, 0, 0);
+      pop();
     }
 
     pop();
