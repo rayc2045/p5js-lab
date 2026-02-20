@@ -24,9 +24,6 @@
         place-content: center;
         color: gainsboro;
         background-color: black;
-        & ::selection {
-          background-color: firebrick;
-        }
       }
       main {
         padding-block: var(--gap);
@@ -40,6 +37,9 @@
           margin: 0;
           font-family: monospace;
           letter-spacing: 0.05rem;
+          &::selection {
+            background-color: firebrick;
+          }
         }
       }
     </style>

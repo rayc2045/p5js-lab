@@ -14,7 +14,7 @@ function draw() {
       r = i + noise(i / 10) * map(mouseX, 0, width, 0, 100);
     textFont("monospace");
     textSize(width / 50 + i / 20);
-    textWeight(700);
+    // textWeight(700);
     text(txt[i % txt.length], r * cos(ang), r * sin(ang));
   }
 }
