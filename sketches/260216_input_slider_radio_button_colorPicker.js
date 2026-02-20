@@ -3,7 +3,7 @@ let inputEl,
   buttonEl,
   randomValue = 0,
   colorPickerEl,
-  radioElement;
+  radioEl;
 
 function setup() {
   const s = min(innerWidth, innerHeight) * 0.9;
@@ -16,55 +16,63 @@ function setup() {
   sliderEl.position(width / 20, height / 20 + 50);
 
   buttonEl = createButton("Shake!");
+  buttonEl.style("padding", ".25em .75em");
+  buttonEl.style("font-size", ".9em");
+  buttonEl.style("cursor", "pointer");
   buttonEl.position(width / 20, height / 20 + 100);
   buttonEl.mousePressed(() => {
     randomValue = randomValue === 0 ? random(5, 15) : 0;
   });
 
   colorPickerEl = createColorPicker("deepskyblue");
+  colorPickerEl.style("cursor", "pointer");
   colorPickerEl.position(width / 20, height / 20 + 150);
 
-  radioElement = createRadio();
-  radioElement.option("normal");
-  radioElement.option("rotate");
-  radioElement.option("scale");
-  radioElement.style("padding", ".1em .25em");
-  radioElement.style("color", "black");
-  radioElement.style("background-color", "gainsboro");
-  radioElement.position(width / 20, height / 20 + 200);
+  radioEl = createRadio();
+  radioEl.option("normal");
+  radioEl.option("rotate");
+  radioEl.option("scale");
+  radioEl.style("padding", ".1em .5em .1em.25em");
+  radioEl.style("color", "black");
+  radioEl.style("background-color", "gainsboro");
+  radioEl.style("border-radius", "3px");
+  radioEl.position(width / 20, height / 20 + 200);
 }
 
 function draw() {
   background("black");
 
   let txt = inputEl.value();
-  const sliderValue = sliderEl.value(),
-    selectedColor = colorPickerEl.value(),
+  const fontSize = sliderEl.value(),
     textLength = textWidth(txt) + 10,
-    mode = radioElement.value();
+    clr = colorPickerEl.value(),
+    mode = radioEl.value();
 
   if (txt === "hello") txt = "✋";
-  textSize(sliderValue);
+  textSize(fontSize);
   textStyle(BOLD);
 
   let rowIdx = 0;
   for (let y = 0; y < height; y += 60) {
     push();
 
-    rowIdx++;
     if (rowIdx % 2 === 0) {
-      fill(selectedColor);
+      fill(clr);
       translate(textLength / 2, 0);
     } else {
       fill("gold");
     }
+    rowIdx++;
 
     for (let x = 0 - textLength; x < width; x += textLength) {
       push();
       const value = random(-randomValue, randomValue);
       translate(x + value, y + value);
-      if (mode === "rotate") rotate(sin(frameCount / 20 + y / 10));
-      else if (mode === "scale") scale(sin(frameCount / 20 + y / 10) + 1);
+      if (mode === "rotate") {
+        rotate(sin(frameCount / 20 + y / 10));
+      } else if (mode === "scale") {
+        scale(sin(frameCount / 20 + y / 10) + 1);
+      }
       text(txt, 0, 0);
       pop();
     }
