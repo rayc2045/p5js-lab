@@ -27,22 +27,24 @@ function waitForElement(selector) {
 function p(...args) {
   console.log(...args);
 
-  const consoleEl = document.querySelector(".console"),
-    textContent = args.join(" ");
+  const logEl = document.querySelector(".log"),
+    textContent = args.map((arg) => JSON.stringify(arg)).join(" ");
 
-  if (consoleEl) {
-    consoleEl.textContent = textContent;
+  if (logEl) {
+    logEl.textContent = textContent;
   } else {
     appendElement(document.body, "div", {
-      className: "console",
+      className: "log",
       style: `
         position: fixed; bottom: 0; left: 0;
-        width: 100%;
-        padding: .75em;
-        padding-left: 1em;
+        padding: .75em 1em;
         font-family: monospace;
         font-size: 1.1em;
-        color: darkgray;`,
+        word-break: break-all;
+        color: darkgray;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        user-select: none;`,
       textContent,
     });
   }
