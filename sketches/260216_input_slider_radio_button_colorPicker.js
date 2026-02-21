@@ -1,7 +1,7 @@
 let inputEl,
   sliderEl,
   buttonEl,
-  randomValue = 0,
+  shakeValue = 0,
   colorPickerEl,
   radioEl;
 
@@ -11,6 +11,7 @@ function setup() {
 
   inputEl = createInput(random(["Hello", "🐝 嗡嗡"]));
   inputEl.position(width / 20, height / 20);
+  inputEl.input(userInput);
 
   sliderEl = createSlider(36, 114, 48, 0.1); // min, max, default, step
   sliderEl.position(width / 20, height / 20 + 50);
@@ -21,7 +22,7 @@ function setup() {
   buttonEl.style("cursor", "pointer");
   buttonEl.position(width / 20, height / 20 + 100);
   buttonEl.mousePressed(() => {
-    randomValue = randomValue === 0 ? random(5, 15) : 0;
+    shakeValue = shakeValue === 0 ? random(5, 15) : 0;
   });
 
   colorPickerEl = createColorPicker("deepskyblue");
@@ -39,6 +40,10 @@ function setup() {
   radioEl.position(width / 20, height / 20 + 200);
 }
 
+function userInput() {
+  if (inputEl.value() === "hello") inputEl.value("✋");
+}
+
 function draw() {
   background("black");
 
@@ -48,7 +53,6 @@ function draw() {
     clr = colorPickerEl.value(),
     mode = radioEl.value();
 
-  if (txt === "hello") txt = "✋";
   textSize(fontSize);
   textStyle(BOLD);
 
@@ -66,7 +70,7 @@ function draw() {
 
     for (let x = 0 - textLength; x < width; x += textLength) {
       push();
-      const value = random(-randomValue, randomValue);
+      const value = random(-shakeValue, shakeValue);
       translate(x + value, y + value);
       if (mode === "rotate") {
         rotate(sin(frameCount / 20 + y / 10));
